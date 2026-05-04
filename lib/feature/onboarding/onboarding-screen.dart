@@ -1,4 +1,5 @@
-// feature/onboarding/onboarding-screen.dart
+import 'package:flutter/material.dart';
+
 class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
@@ -18,11 +19,11 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // تأكدي إن الصورة موجودة في الـ pubspec.yaml
           Image.asset(image, height: 250),
           const SizedBox(height: 30),
           Text(
             title,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -32,7 +33,7 @@ class OnboardingPage extends StatelessWidget {
           Text(
             desc,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey, fontSize: 16),
           ),
         ],
       ),
@@ -51,7 +52,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController controller = PageController();
   int currentIndex = 0;
 
-  // تعريف القائمة بشكل صريح لتجنب مشاكل الـ Null Safety
   final List<Map<String, String>> pages = [
     {
       "image": "assets/onboarding.png",
@@ -59,7 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       "desc": "Become your own money manager and make every penny count."
     },
     {
-      "image": "assets/onboarding2.png", // مثال لصفحة تانية
+      "image": "assets/onboarding2.png",
       "title": "Know where your money goes",
       "desc": "Track your transaction easily, with categories and financial report."
     },
@@ -81,8 +81,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 });
               },
               itemBuilder: (context, index) {
+                // شلنا الـ const من هنا لأن البيانات متغيرة
                 return OnboardingPage(
-                  // هنا استخدمنا toString() أو ! لضمان عدم وجود Null
                   image: pages[index]["image"]!,
                   title: pages[index]["title"]!,
                   desc: pages[index]["desc"]!,
@@ -90,19 +90,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
             ),
           ),
-
-          // زرار Get Started
           Padding(
             padding: const EdgeInsets.all(20),
             child: SizedBox(
               width: double.infinity,
-              height: 56, // طول مناسب للزرار
+              height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                  // الانتقال لشاشة الـ Login مثلاً
+                  // هنا ضيفي الانتقال للشاشة التالية
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF7F3DFF), // اللون البنفسجي اللي في الفيجما
+                  backgroundColor: const Color(0xFF7F3DFF),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
