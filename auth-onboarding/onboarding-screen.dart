@@ -1,3 +1,4 @@
+// auth-onboarding/onboarding-screen.dart
 class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
