@@ -1,4 +1,4 @@
-// auth-onboarding/onboarding-screen.dart
+// feature/onboarding/onboarding-screen.dart
 class OnboardingPage extends StatelessWidget {
   final String image;
   final String title;
@@ -18,11 +18,12 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // تأكدي إن الصورة موجودة في الـ pubspec.yaml
           Image.asset(image, height: 250),
           const SizedBox(height: 30),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
@@ -31,14 +32,13 @@ class OnboardingPage extends StatelessWidget {
           Text(
             desc,
             textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.grey),
           ),
         ],
       ),
     );
   }
 }
-
-
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -51,21 +51,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController controller = PageController();
   int currentIndex = 0;
 
-  final pages = [
+  // تعريف القائمة بشكل صريح لتجنب مشاكل الـ Null Safety
+  final List<Map<String, String>> pages = [
     {
       "image": "assets/onboarding.png",
-      "title": "Expense Tracker",
-      "desc": "Going cashless has never been easier with the world's most leading expense manager."
+      "title": "Gain total control of your money",
+      "desc": "Become your own money manager and make every penny count."
+    },
+    {
+      "image": "assets/onboarding2.png", // مثال لصفحة تانية
+      "title": "Know where your money goes",
+      "desc": "Track your transaction easily, with categories and financial report."
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
-
-          /// الصفحات
           Expanded(
             child: PageView.builder(
               controller: controller,
@@ -76,29 +81,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 });
               },
               itemBuilder: (context, index) {
-                final item = pages[index];
                 return OnboardingPage(
-                  image: item["image"]!,
-                  title: item["title"]!,
-                  desc: item["desc"]!,
+                  // هنا استخدمنا toString() أو ! لضمان عدم وجود Null
+                  image: pages[index]["image"]!,
+                  title: pages[index]["title"]!,
+                  desc: pages[index]["desc"]!,
                 );
               },
             ),
           ),
 
-          /// زرار Get Started
+          // زرار Get Started
           Padding(
             padding: const EdgeInsets.all(20),
             child: SizedBox(
               width: double.infinity,
+              height: 56, // طول مناسب للزرار
               child: ElevatedButton(
                 onPressed: () {
-                  // هنا تروحي للـ Login
+                  // الانتقال لشاشة الـ Login مثلاً
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: const Color(0xFF7F3DFF), // اللون البنفسجي اللي في الفيجما
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
-                child: const Text("Get Started"),
+                child: const Text(
+                  "Get Started",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
               ),
             ),
           ),
