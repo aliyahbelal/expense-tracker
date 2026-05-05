@@ -99,7 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 56, // طول مناسب للزرار
               child: ElevatedButton(
                 onPressed: () {
-                  // الانتقال لشاشة الـ Login مثلاً
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF7F3DFF), // اللون البنفسجي اللي في الفيجما
