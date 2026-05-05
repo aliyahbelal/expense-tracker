@@ -4,7 +4,7 @@ import 'transactions_model.dart';
 class TransactionTile extends StatelessWidget {
   final TransactionModel transaction;
 
-  const TransactionTile({Key? key, required this.transaction}) : super(key: key);
+  const TransactionTile({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
