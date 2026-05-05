@@ -6,7 +6,7 @@ import 'transaction_tile.dart';
 // دي الشاشة الكاملة اللي إنتي مسؤولة عنها
 
 class TransactionsScreen extends StatelessWidget {
-  const TransactionsScreen({Key? key}) : super(key: key);
+  const TransactionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
